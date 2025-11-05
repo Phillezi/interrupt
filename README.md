@@ -4,7 +4,8 @@ A small Go package that provides a simple, structured way to handle graceful shu
 
 `interrupt` listens for operating system interrupt signals (e.g. `SIGINT` / Ctrl+C) and cancels a shared `context.Context`. All goroutines running under that context can then begin their graceful termination.
 
-> [!TIP]: If you just need this then the built in `signal.NotifyContext(context.Background(), os.Interrupt)` might be enough.
+> [!TIP]
+> If you just need this then the built in `signal.NotifyContext(context.Background(), os.Interrupt)` might be enough.
 
 When each worker completes, it calls a special `manager.DoneFunc`, and when all workers have exited, the main program can exit cleanly.
 If a second interrupt signal is received before all workers finish, `Run()/Wait()` will return immediately, allowing the main thread to exit forcefully.
