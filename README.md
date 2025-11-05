@@ -32,7 +32,7 @@ You manage your own `manager.Manager` and register workers with `m.Add()` and `d
 
 #### Example
 
-`examples/manual/main.go`
+[`examples/manual/main.go`](./examples/manual/main.go)
 
 ```go
 package main
@@ -81,7 +81,7 @@ Use `interrupt.Main()` and spawn child goroutines with `m.Go()`.
 
 #### Example
 
-`examples/managed/main.go`
+[`examples/managed/main.go`](./examples/managed/main.go)
 
 ```go
 package main
