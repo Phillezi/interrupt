@@ -48,7 +48,7 @@ func main() {
 			context.AfterFunc(ctx, func() {
 				fmt.Printf("[goroutine %d] I was cancelled! Starting graceful shutdown...\n", id)
 
-				fmt.Printf("[goroutine %d] Sleeping 10s for cleanup...\n", id)
+				fmt.Printf("[goroutine %d] Sleeping 3s for cleanup...\n", id)
 				time.Sleep(3 * time.Second)
 				fmt.Printf("[goroutine %d] Done.\n", id)
 			})
