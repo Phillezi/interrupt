@@ -43,6 +43,4 @@ func main() {
 		})
 
 	}, interrupt.WithManagerOpts(manager.WithLogger(stdr.New(nil)), manager.WithPrompt(true)))
-
-	time.Sleep(1 * time.Second)
 }
