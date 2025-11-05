@@ -102,8 +102,8 @@ func (m *ManagerImpl) Context() context.Context {
 }
 
 func (m *ManagerImpl) Go(f func(ctx context.Context)) {
+	done := m.Add()
 	go func() {
-		done := m.Add()
 		defer done()
 		f(m.ctx)
 	}()

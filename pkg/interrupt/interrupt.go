@@ -47,7 +47,9 @@ func Main(mainFunc func(m manager.ManagedManager, cancel context.CancelFunc), op
 	m, cancel := Cancellable(opts...)
 	defer cancel()
 
-	go mainFunc(m, cancel)
+	m.Go(func(_ context.Context) {
+		mainFunc(m, cancel)
+	})
 
 	m.Run()
 }

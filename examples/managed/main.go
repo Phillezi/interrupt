@@ -17,7 +17,6 @@ func main() {
 		fmt.Println("Hello world!")
 
 		var g atomic.Int32
-
 		m.Go(func(ctx context.Context) {
 			id := g.Add(1)
 			fmt.Printf("[goroutine %d] Hi, I am a goroutine\n", id)
@@ -42,5 +41,19 @@ func main() {
 			fmt.Printf("[goroutine %d] Done.\n", id)
 		})
 
+		m.Go(func(ctx context.Context) {
+			id := g.Add(1)
+			fmt.Printf("[goroutine %d] Hi, I am a goroutine\n", id)
+
+			context.AfterFunc(ctx, func() {
+				fmt.Printf("[goroutine %d] I was cancelled! Starting graceful shutdown...\n", id)
+
+				fmt.Printf("[goroutine %d] Sleeping 10s for cleanup...\n", id)
+				time.Sleep(3 * time.Second)
+				fmt.Printf("[goroutine %d] Done.\n", id)
+			})
+
+			<-ctx.Done()
+		})
 	}, interrupt.WithManagerOpts(manager.WithLogger(stdr.New(nil)), manager.WithPrompt(true)))
 }
